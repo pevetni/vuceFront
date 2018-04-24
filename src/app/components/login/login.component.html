@@ -1,0 +1,99 @@
+<br>
+<div class="col-md-4"></div>
+<div class="col-md-4">
+  <div class="panel panel-default panel-icon panel-primary margin-40 panel-loading">
+    <form class="form-signin" [formGroup]="loginForm" (ngSubmit)="isLogin?login(loginForm):forgot()">
+    <div class="panel-heading"><h1>Iniciar sesión</h1><i class="fa fa-lock"></i></div>
+    <div class="panel-body">        
+          <div *ngIf="isLogin">
+            <div class="form-group">
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                  </span>
+                  <input id="txtuser" class="form-control" formControlName="user" placeholder="Usuario" autofocus required>
+                </div>
+                
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-lock fa" aria-hidden="true"></i>
+                  </span>
+                  <input type="password" formControlName="pwd" class="form-control" placeholder="Password" required>
+                </div>
+              </div>
+              
+            </div>
+            <p *ngIf="msgRespuesta" class="msg-forgot text-center" style="color:white">{{msgRespuesta}}</p>
+            
+          </div>
+
+          <!-- <div *ngIf="!isLogin">
+            <div class="form-group">
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-user fa" aria-hidden="true"></i>
+                  </span>
+                  <input id="txtuserf" class="form-control" formControlName="user" placeholder="Usuario" autofocus required (change)="buildForm(false)">
+                </div>
+                <div *ngIf="formErrors.user" class="alert alert-danger">
+                  {{ formErrors.user }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                  </span>
+                  <textarea id="txtqsf" class="form-control" formControlName="qs" placeholder="Pregunta Secreta" autofocus required readonly></textarea>
+
+                </div>
+                <div *ngIf="formErrors.qs" class="alert alert-danger">
+                  {{ formErrors.qs }}
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="cols-sm-10">
+                <div class="input-group">
+                  <span class="input-group-addon">
+                    <i class="fa fa-question-circle-o" aria-hidden="true"></i>
+                  </span>
+                  <input type="password" id="txtasf" class="form-control" formControlName="as" placeholder="Respuesta Secreta" autofocus required>
+                </div>
+                <div *ngIf="formErrors.as" class="alert alert-danger">
+                  {{ formErrors.as }}
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" [disabled]="!loginForm.valid">Confirmar</button>
+              </div>
+              <div class="col-md-6">
+                <button class="btn btn-lg btn-primary btn-block btn-signin" (click)="goForgot()">Cancelar</button>
+              </div>
+            </div>
+          </div> -->
+        <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" [disabled]="!loginForm.valid">Ingresar</button>
+    </div>
+    <div class="panel-footer">
+        <div *ngIf="formErrors.user">
+          {{ formErrors.user }}
+        </div>
+        <div *ngIf="formErrors.pwd">
+          {{ formErrors.pwd }}
+        </div>
+    </div>
+    </form>
+  </div>
+</div>
+<div class="col-md-4"></div>
+        
