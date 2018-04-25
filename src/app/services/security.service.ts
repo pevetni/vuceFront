@@ -16,10 +16,8 @@ export class SecurityService {
     public isloged: boolean;
     public isloged$: Observable<boolean>;
     private _token: string;
-    // private _tokenrodi: string;
     private _userName: string;
     private actionUrl: string;
-    // private headers: Headers;
     private storage: any;
     public onLogout: EventEmitter<any>;
     public onLogin: EventEmitter<any>;
@@ -30,9 +28,6 @@ export class SecurityService {
         private http: HttpClient,
         private configService: ConfigService,
         private _compiler: Compiler) {
-        // this.headers = new Headers();
-        // this.headers.append('Content-Type', 'application/json');
-        // this.headers.append('Accept', 'application/json');
         this.storage = sessionStorage;
 
         if (this.retrieve('IsAuthorized') !== '') {
@@ -43,12 +38,9 @@ export class SecurityService {
         this.onLogout = new EventEmitter<any>();
         this.onLogin = new EventEmitter<any>();
         this.onLogChanged = new EventEmitter<boolean>();
-        // console.log('Borrar Cookie Servicio');
-        // this.borarCookieSignalR();
 
         this.onLogChanged.subscribe(x => {
             this.isloged = x;
-            // console.log( this.isloged);
             sessionStorage.setItem('isLoged', 'true');
             if (!x) {
                 sessionStorage.clear();
@@ -65,10 +57,6 @@ export class SecurityService {
     get token(): string {
         return this._token;
     }
-
-    // get tokenrodi(): string {
-    //     return this._tokenrodi;
-    // }
 
     get user(): string {
         return this._userName;
@@ -108,17 +96,12 @@ export class SecurityService {
         if (jwt !== '') {
             const account: any = { 'token': json.access_token, 'tokenrodi': json.tokenRodi, 'user': json.userName };
             localStorage.setItem('account', JSON.stringify(account));
-            // Cookie.set('BearerToken', this._token, 10  , '/' , 'sba.com.ar') ;
-            // console.log(account);
             Cookie.set('BearerToken', this._token, 10, '/', this.configService.domain);
-            // Cookie.set('BearerToken', this._token, 10  , '/', '') ;
         } else {
             localStorage.clear();
-            // Cookie.delete('BearerToken', '/' , this.configService.domain) ;
         }
     }
     public borrarCookieSignalR() {
-        // console.log('borrarCookieSignalR');
         Cookie.delete('BearerToken', '/', this.configService.domain);
     }
 
@@ -148,7 +131,6 @@ export class SecurityService {
         });
     }
     private logout$() {
-        // const headers = this.getGeneralHeader();
         this.saveJwt('');
         const _ordenesUrl = `${this.configService.apiUrl}account/logout`;
 
@@ -161,8 +143,6 @@ export class SecurityService {
         const account: any = localStorage.getItem('account');
         const authToken = this.token || JSON.parse(account).token;
         const authUser = this.user || JSON.parse(account).user;
-
-        // console.log(authToken);
 
         const headers = new HttpHeaders().
             set('Accept', 'application/json')
@@ -189,7 +169,6 @@ export class SecurityService {
     }
 
     private handleError(error: HttpErrorResponse) {
-        // console.error(error.status);
         return Observable.throw(error);
     }
 }

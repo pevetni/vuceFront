@@ -4,6 +4,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable';
 import { Subscription } from 'rxjs/Subscription';
+import { SecurityService } from '../../services/security.service';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,8 @@ export class LoginComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private route: ActivatedRoute,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private securityService: SecurityService
   ) {}
 
   ngOnInit(): void {
@@ -56,14 +58,14 @@ export class LoginComponent implements OnInit, OnDestroy {
   };
 
   login({ value, valid }: { value: any, valid: boolean }) {
-    /* this.subscriptionLogin = this.securityService.Login(value.user, value.pwd)
+    this.subscriptionLogin = this.securityService.Login(value.user, value.pwd)
       .subscribe(resp => {
         sessionStorage.setItem('user', value.user);
         sessionStorage.setItem('pwd', value.pwd);
         if (this.securityService.redirectUrl) {
-          this.router.navigateByUrl(this.securityService.redirectUrl);
+          //this.router.navigateByUrl(this.securityService.redirectUrl);
         } else {
-          this.router.navigate(['general']);
+          //this.router.navigate(['general']);
         }
       },
         (err: HttpErrorResponse) => {
@@ -82,7 +84,7 @@ export class LoginComponent implements OnInit, OnDestroy {
               this.formErrors = Object.assign({}, this.formErrors, { 'pwd': errDescrip });
             }
           }
-        }); */
+        });
   }
 
   goForgot(): void {
