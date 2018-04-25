@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app.routes';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfigService } from './services/configuration.service';
 import { environment } from '../environments/environment';
+import { SecurityService } from './services/security.service';
 
 export function ConfigLoader(configService: ConfigService) {
   // Note: this factory need to return a function (that return a promise)
@@ -27,6 +28,7 @@ export function ConfigLoader(configService: ConfigService) {
     ReactiveFormsModule,
   ],
   providers: [
+    SecurityService,
     ConfigService,
     { provide: LOCALE_ID, useValue: 'es' },
     { provide: 'ORIGIN_URL', useValue: location.origin },
